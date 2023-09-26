@@ -10,17 +10,12 @@ $(document).ready(function () {
     }
     $('.amenities h4').text(Object.values(amenityArr).join(', '));
   });
-
-  const request = require('request');
-  const url = 'http://0.0.0.0:5001/api/v1/status/';
-
-  request.get(url, (data, textStatus) => {
-    if (textStatus === 'success') {
-      if (data.status === 'OK') {
-        $('#api_status').addClass('available');
-      } else {
-        $('#api_status').removeClass('available');
-      }
+  $.get('http://localhost:5001/api/v1/status/', (data) => {
+    if (data.status === 'OK') {
+      $('div#api_status').addClass('available');
+    }
+    else {
+      $('div#api_status').removeClass('available');
     }
   });
 });
